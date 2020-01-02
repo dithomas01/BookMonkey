@@ -1,13 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Book} from './book';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookStoreService {
+  private api = 'https://api3.angular-buch.com';
   books: Book[];
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.books = [
       {
         isbn: '9783864906466',
@@ -38,11 +41,15 @@ export class BookStoreService {
     ];
   }
 
-  getAll(): Book[] {
-    return this.books;
+  getAll(): Observable<Book[]> {
+    return this.http.get<any[]>(`${this.api}/books`);
   }
 
-  getSingle(isbn: string): Book {
-    return this.books.find(book => book.isbn === isbn);
+  getSingle(isbn: string): Observable<Book> {
+    return this.http.get<any>(`${this.api}/book/${isbn}`);
+  }
+
+  remove(isbn: string): Observable<any> {
+    return this.http.delete(`${this.api}/book/${isbn}`, {responseType: 'text'});
   }
 }
