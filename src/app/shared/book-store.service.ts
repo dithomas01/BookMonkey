@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Book} from './book';
 
 @Injectable({
@@ -40,5 +40,9 @@ export class BookStoreService {
 
   getAll(): Book[] {
     return this.books;
+  }
+
+  getSingle(isbn: string): Book {
+    return this.books.find(book => book.isbn === isbn);
   }
 }
