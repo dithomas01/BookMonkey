@@ -69,6 +69,16 @@ export class BookStoreService {
     return this.http.delete(`${this.api}/book/${isbn}`, {responseType: 'text'});
   }
 
+  create(book: Book): Observable<any> {
+    return this.http.post(
+      `${this.api}/book`,
+      book,
+      { responseType: 'text' }
+    ).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   getAllSearch(searchTerm: string): Observable<Book[]> {
     return this.http.get<BookRaw[]>(
       `${this.api}/books/search/${searchTerm}`
