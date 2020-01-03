@@ -10,7 +10,7 @@ import {catchError, map, retry} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class BookStoreService {
-  private api = 'https://api3.angular-buch.com';
+  private api = 'https://api3.angular-buch.com/secure';
   books: Book[];
 
   constructor(private http: HttpClient) {
