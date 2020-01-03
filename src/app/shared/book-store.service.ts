@@ -49,7 +49,8 @@ export class BookStoreService {
       .get<BookRaw[]>(`${this.api}/books`)
       .pipe(
         retry(3),
-        map(booksRaw => booksRaw.map(b => BookFactory.fromRaw(b))),
+        map(booksRaw => booksRaw.map(b => BookFactory.fromRaw(b)),
+        ),
         catchError(this.errorHandler)
       );
   }
@@ -66,6 +67,17 @@ export class BookStoreService {
 
   remove(isbn: string): Observable<any> {
     return this.http.delete(`${this.api}/book/${isbn}`, {responseType: 'text'});
+  }
+
+  getAllSearch(searchTerm: string): Observable<Book[]> {
+    return this.http.get<BookRaw[]>(
+      `${this.api}/books/search/${searchTerm}`
+    ).pipe(
+      retry(3),
+      map(booksRaw => booksRaw.map(b => BookFactory.fromRaw(b)),
+      ),
+      catchError(this.errorHandler)
+    );
   }
 
   private errorHandler(error: HttpErrorResponse): Observable<any> {
