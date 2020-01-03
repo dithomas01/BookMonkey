@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BookFactory} from '../shared/book-factory';
 
 @Component({
   selector: 'bm-book-form',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookFormComponent implements OnInit {
 
-  constructor() { }
+  book = BookFactory.empty();
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
