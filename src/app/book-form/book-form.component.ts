@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Book, Thumbnail} from '../shared/book';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {BookExistsValidatorService} from '../shared/book-exists-validator.service';
+import {BookValidators} from '../shared/book.validators';
 
 @Component({
   selector: 'bm-book-form',
@@ -15,7 +17,7 @@ export class BookFormComponent implements OnInit, OnChanges {
   bookForm: FormGroup;
   @Output() submitBook = new EventEmitter<Book>();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private bookExistsValidator: BookExistsValidatorService) {
   }
 
   submitForm() {
@@ -53,11 +55,14 @@ export class BookFormComponent implements OnInit, OnChanges {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       subtitle: [''],
-      isbn: [{ value: '', disabled: this.editing }, [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(13)
-      ]],
+      isbn: [
+        {value: '', disabled: this.editing},
+        [
+          Validators.required,
+          BookValidators.isbnFormat
+        ],
+        this.editing ? null : [this.bookExistsValidator]
+      ],
       description: [''],
       authors: this.buildAuthorsArray(['']),
       thumbnails: this.buildThumbnailsArray([
@@ -76,7 +81,10 @@ export class BookFormComponent implements OnInit, OnChanges {
   }
 
   private buildAuthorsArray(values: string[]): FormArray {
-    return this.fb.array(values, Validators.required);
+    return this.fb.array(
+      values,
+      BookValidators.atLeastOneAuthor
+    );
   }
 
   private buildThumbnailsArray(values: Thumbnail[]): FormArray {
