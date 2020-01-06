@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Book, Thumbnail} from '../shared/book';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
@@ -7,7 +7,10 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
   templateUrl: './book-form.component.html',
   styleUrls: ['./book-form.component.css']
 })
-export class BookFormComponent implements OnInit {
+export class BookFormComponent implements OnInit, OnChanges {
+
+  @Input() book: Book;
+  @Input() editing = false;
 
   bookForm: FormGroup;
   @Output() submitBook = new EventEmitter<Book>();
@@ -20,10 +23,13 @@ export class BookFormComponent implements OnInit {
 
     const authors = formValue.authors.filter(author => author);
     const thumbnails = formValue.thumbnails.filter(thumbnail => thumbnail.url);
+    const isbn = this.editing ? this.book.isbn : formValue.isbn;
 
     const newBook: Book = {
       ...formValue,
-      authors, thumbnails
+      isbn,
+      authors,
+      thumbnails
     };
 
     this.submitBook.emit(newBook);
@@ -34,6 +40,11 @@ export class BookFormComponent implements OnInit {
     this.initForm();
   }
 
+  ngOnChanges() {
+    this.initForm();
+    this.setFormValues(this.book);
+  }
+
   private initForm() {
     if (this.bookForm) {
       return;
@@ -42,7 +53,7 @@ export class BookFormComponent implements OnInit {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       subtitle: [''],
-      isbn: ['', [
+      isbn: [{ value: '', disabled: this.editing }, [
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(13)
@@ -54,6 +65,14 @@ export class BookFormComponent implements OnInit {
       ]),
       published: []
     });
+  }
+
+  get authors(): FormArray {
+    return this.bookForm.get('authors') as FormArray;
+  }
+
+  get thumbnails(): FormArray {
+    return this.bookForm.get('thumbnails') as FormArray;
   }
 
   private buildAuthorsArray(values: string[]): FormArray {
@@ -75,12 +94,18 @@ export class BookFormComponent implements OnInit {
     );
   }
 
-  get authors(): FormArray {
-    return this.bookForm.get('authors') as FormArray;
-  }
+  private setFormValues(book: Book) {
+    this.bookForm.patchValue(book);
 
-  get thumbnails(): FormArray {
-    return this.bookForm.get('thumbnails') as FormArray;
+    this.bookForm.setControl(
+      'authors',
+      this.buildAuthorsArray(book.authors)
+    );
+
+    this.bookForm.setControl(
+      'thumbnails',
+      this.buildThumbnailsArray(book.thumbnails)
+    );
   }
 
 }

@@ -44,6 +44,16 @@ export class BookStoreService {
     // ];
   }
 
+  create(book: Book): Observable<any> {
+    return this.http.post(
+      `${this.api}/book`,
+      book,
+      {responseType: 'text'}
+    ).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   getAll(): Observable<Book[]> {
     return this.http
       .get<BookRaw[]>(`${this.api}/books`)
@@ -65,20 +75,6 @@ export class BookStoreService {
       );
   }
 
-  remove(isbn: string): Observable<any> {
-    return this.http.delete(`${this.api}/book/${isbn}`, {responseType: 'text'});
-  }
-
-  create(book: Book): Observable<any> {
-    return this.http.post(
-      `${this.api}/book`,
-      book,
-      { responseType: 'text' }
-    ).pipe(
-      catchError(this.errorHandler)
-    );
-  }
-
   getAllSearch(searchTerm: string): Observable<Book[]> {
     return this.http.get<BookRaw[]>(
       `${this.api}/books/search/${searchTerm}`
@@ -88,6 +84,20 @@ export class BookStoreService {
       ),
       catchError(this.errorHandler)
     );
+  }
+
+  update(book: Book): Observable<any> {
+    return this.http.put(
+      `${this.api}/book/${book.isbn}`,
+      book,
+      {responseType: 'text'}
+    ).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  remove(isbn: string): Observable<any> {
+    return this.http.delete(`${this.api}/book/${isbn}`, {responseType: 'text'});
   }
 
   private errorHandler(error: HttpErrorResponse): Observable<any> {
