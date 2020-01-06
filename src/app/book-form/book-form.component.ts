@@ -1,7 +1,6 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {BookFactory} from '../shared/book-factory';
-import {Book} from '../shared/book';
-import {NgForm} from '@angular/forms';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Book, Thumbnail} from '../shared/book';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'bm-book-form',
@@ -10,22 +9,67 @@ import {NgForm} from '@angular/forms';
 })
 export class BookFormComponent implements OnInit {
 
-  book = BookFactory.empty();
-
+  bookForm: FormGroup;
   @Output() submitBook = new EventEmitter<Book>();
-  @ViewChild('bookForm', {static: false}) bookForm: NgForm;
 
-  constructor() {
+  constructor(private fb: FormBuilder) {
   }
 
   submitForm() {
-    this.submitBook.emit(this.book);
-
-    this.book = BookFactory.empty();
     this.bookForm.reset();
   }
 
   ngOnInit() {
+    this.initForm();
+  }
+
+  private initForm() {
+    if (this.bookForm) {
+      return;
+    }
+
+    this.bookForm = this.fb.group({
+      title: ['', Validators.required],
+      subtitle: [''],
+      isbn: ['', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(13)
+      ]],
+      description: [''],
+      authors: this.buildAuthorsArray(['']),
+      thumbnails: this.buildThumbnailsArray([
+        {title: '', url: ''}
+      ]),
+      published: []
+    });
+  }
+
+  private buildAuthorsArray(values: string[]): FormArray {
+    return this.fb.array(values, Validators.required);
+  }
+
+  private buildThumbnailsArray(values: Thumbnail[]): FormArray {
+    return this.fb.array(values.map(t => this.fb.group(t))
+    );
+  }
+
+  addAuthorControl() {
+    this.authors.push(this.fb.control(''));
+  }
+
+  addThumbnailsControl() {
+    this.thumbnails.push(
+      this.fb.group(({url: '', title: ''}))
+    );
+  }
+
+  get authors(): FormArray {
+    return this.bookForm.get('authors') as FormArray;
+  }
+
+  get thumbnails(): FormArray {
+    return this.bookForm.get('thumbnails') as FormArray;
   }
 
 }
