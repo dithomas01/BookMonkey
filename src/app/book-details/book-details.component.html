@@ -1,4 +1,4 @@
-<div *ngIf="book; else loading">
+<ng-container *ngIf="book$ | async as book; else loading">
   <h1>{{ book.title }}</h1>
   <h3 *ngIf="book.subtitle">{{ book.subtitle }}</h3>
   <div class="ui divider"></div>
@@ -33,7 +33,7 @@
   <a class="ui tiny yellow labeled icon button" [routerLink]="['../../admin/edit', book.isbn]">
     <i class="write icon"></i> Buch bearbeiten
   </a>
-</div>
+</ng-container>
 
 <ng-template #loading>
   <div class="ui active centered inline loader"></div>
