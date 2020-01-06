@@ -100,6 +100,14 @@ export class BookStoreService {
     return this.http.delete(`${this.api}/book/${isbn}`, {responseType: 'text'});
   }
 
+  check(isbn: string): Observable<boolean> {
+    return this.http.get(
+      `${this.api}/book/${isbn}/check`
+    ).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   private errorHandler(error: HttpErrorResponse): Observable<any> {
     console.error('Fehler aufgetreten!');
     return throwError(error);
