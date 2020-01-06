@@ -16,6 +16,17 @@ export class BookFormComponent implements OnInit {
   }
 
   submitForm() {
+    const formValue = this.bookForm.value;
+
+    const authors = formValue.authors.filter(author => author);
+    const thumbnails = formValue.thumbnails.filter(thumbnail => thumbnail.url);
+
+    const newBook: Book = {
+      ...formValue,
+      authors, thumbnails
+    };
+
+    this.submitBook.emit(newBook);
     this.bookForm.reset();
   }
 
