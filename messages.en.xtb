@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE translationbundle [
+<!ELEMENT translationbundle (translation)*>
+<!ATTLIST translationbundle class CDATA #IMPLIED>
+<!ATTLIST translationbundle lang CDATA #IMPLIED>
+
+<!ELEMENT translation (#PCDATA|ph|source)*>
+<!ATTLIST translation id CDATA #IMPLIED>
+<!ATTLIST translation seq CDATA #IMPLIED>
+<!ATTLIST translation name CDATA #IMPLIED>
+<!ATTLIST translation desc CDATA #IMPLIED>
+<!ATTLIST translation meaning CDATA #IMPLIED>
+<!ATTLIST translation obsolete (obsolete) #IMPLIED>
+<!ATTLIST translation xml:space (default|preserve) "default">
+<!ATTLIST translation is_hidden CDATA #IMPLIED>
+
+<!ELEMENT source (#PCDATA)>
+
+<!ELEMENT ph (#PCDATA|ex)*>
+<!ATTLIST ph name CDATA #REQUIRED>
+
+<!ELEMENT ex (#PCDATA)>
+]>
+<translationbundle lang="en">
+  <translation id="AppComponent:home" desc="Text of the link to the home screen"><source>src/app/app.component.html:2</source>Home</translation>
+  <translation id="AppComponent:book" desc="Text of the link to the books screen"><source>src/app/app.component.html:3</source>Books</translation>
+  <translation id="AppComponent:admin" desc="Text of the link to the admin screen"><source>src/app/app.component.html:4</source>Administration</translation>
+  <translation id="HomeComponent:header"><source>src/app/home/home.component.html:1</source>Home</translation>
+  <translation id="HomeComponent:tagline" desc="a proud sentence about the project"><source>src/app/home/home.component.html:2</source>This is the BookMonkey.</translation>
+  <translation id="HomeComponent:book list link" desc="Text of the link to the books screen"><source>src/app/home/home.component.html:4,6</source>
+    See book list
+  </translation>
+  <translation id="HomeComponent:search"><source>src/app/home/home.component.html:10</source>Search</translation>
+  <translation id="BookFormComponent:book form"><source>src/app/admin/create-book/create-book.component.html:1</source><source>src/app/admin/edit-book/edit-book.component.html:1</source>add book</translation>
+  <translation id="BookFormComponent:book title"><source>src/app/admin/book-form/book-form.component.html:3</source>Booktitle</translation>
+  <translation id="BookFormComponent:book subtitle"><source>src/app/admin/book-form/book-form.component.html:7</source>Subtitle</translation>
+  <translation id="BookFormComponent:book isbn"><source>src/app/admin/book-form/book-form.component.html:10</source>ISBN</translation>
+  <translation id="BookFormComponent:book published date"><source>src/app/admin/book-form/book-form.component.html:14</source>Published Date</translation>
+  <translation id="BookFormComponent:book authors"><source>src/app/admin/book-form/book-form.component.html:18</source>Author</translation>
+  <translation id="BookFormComponent:add author"><source>src/app/admin/book-form/book-form.component.html:19,21</source>
+    + author
+  </translation>
+  <translation id="BookFormComponent:author placeholder"><source>src/app/admin/book-form/book-form.component.html:24</source>Authors</translation>
+  <translation id="BookFormComponent:book description"><source>src/app/admin/book-form/book-form.component.html:29</source>Descriptions</translation>
+  <translation id="BookFormComponent:book thumbnails"><source>src/app/admin/book-form/book-form.component.html:32</source>Thumbnails</translation>
+  <translation id="BookFormComponent:add thumbnail"><source>src/app/admin/book-form/book-form.component.html:33,35</source>
+    + Thumbnail
+  </translation>
+  <translation id="BookFormComponent:book url placeholder"><source>src/app/admin/book-form/book-form.component.html:39</source>URL</translation>
+  <translation id="BookFormComponent:book thumbnail placeholder"><source>src/app/admin/book-form/book-form.component.html:42</source>Title</translation>
+  <translation id="BookFormComponent:book form save"><source>src/app/admin/book-form/book-form.component.html:47,49</source>
+    Save
+  </translation>
+  <translation id="BookDetailsComponent:no book"><source>src/app/books/book-list/book-list.component.html:6,8</source>
+      There aren't any books so far.
+    </translation>
+  <translation id="BookDetailsComponent:loading data"><source>src/app/books/book-list/book-list.component.html:13</source>Loading Data...</translation>
+  <translation id="BookDetailsComponent:book authors"><source>src/app/books/book-details/book-details.component.html:7</source>Authors</translation>
+  <translation id="BookDetailsComponent:book isbn"><source>src/app/books/book-details/book-details.component.html:13</source>ISBN</translation>
+  <translation id="BookDetailsComponent:book published date"><source>src/app/books/book-details/book-details.component.html:17</source>Published</translation>
+  <translation id="BookDetailsComponent:book rating"><source>src/app/books/book-details/book-details.component.html:21</source>Rating</translation>
+  <translation id="BookDetailsComponent:book description"><source>src/app/books/book-details/book-details.component.html:27</source>Description</translation>
+  <translation id="BookDetailsComponent:book delete"><source>src/app/books/book-details/book-details.component.html:34,36</source>
+            Delete Book
+        </translation>
+  <translation id="BookDetailsComponent:book edit"><source>src/app/books/book-details/book-details.component.html:40,42</source>
+            Edit Book
+        </translation>
+</translationbundle>
