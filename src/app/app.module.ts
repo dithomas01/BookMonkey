@@ -11,33 +11,33 @@ import {registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        SearchComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule
-    ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: TokenInterceptor,
-            multi: true
-        },
-        {
-            provide: LOCALE_ID,
-            useValue: 'de'
-        }
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    SearchComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'de'
+    }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 
-    constructor() {
-        registerLocaleData(localeDe);
-    }
+  constructor() {
+    registerLocaleData(localeDe);
+  }
 
 }

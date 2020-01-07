@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {CreateBookComponent} from './create-book/create-book.component';
 import {EditBookComponent} from './edit-book/edit-book.component';
 
@@ -7,7 +7,7 @@ import {EditBookComponent} from './edit-book/edit-book.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'admin/create',
+    redirectTo: 'create',
     pathMatch: 'full'
   },
   {
@@ -24,4 +24,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {
+}
