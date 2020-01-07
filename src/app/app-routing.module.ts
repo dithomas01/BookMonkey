@@ -16,27 +16,6 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
-  },
-  {
-    path: 'books',
-    component: BookListComponent
-  },
-  {
-    path: 'books/:isbn',
-    component: BookDetailsComponent
-  },
-  {
-    path: 'admin',
-    redirectTo: 'admin/create',
-    pathMatch: 'full'
-  },
-  {
-    path: 'admin/create',
-    component: CreateBookComponent
-  },
-  {
-    path: 'admin/edit/:isbn',
-    component: EditBookComponent
   }
 ];
 

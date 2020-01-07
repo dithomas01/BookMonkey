@@ -9,35 +9,39 @@ import {SearchComponent} from './search/search.component';
 import {TokenInterceptor} from './shared/token-interceptor';
 import {registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
+import {BooksModule} from './books/books.module';
+import {AdminModule} from './admin/admin.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    SearchComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
-    {
-      provide: LOCALE_ID,
-      useValue: 'de'
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        SearchComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BooksModule,
+        AdminModule
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+        },
+        {
+            provide: LOCALE_ID,
+            useValue: 'de'
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 
-  constructor() {
-    registerLocaleData(localeDe);
-  }
+    constructor() {
+        registerLocaleData(localeDe);
+    }
 
 }
