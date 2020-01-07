@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BookStoreService} from './book-store.service';
+import {BookStoreService} from '../../shared/book-store.service';
 import {FormControl, ValidationErrors} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
