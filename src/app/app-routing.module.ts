@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
-import {HomeComponent} from './admin/home/home.component';
+import {HomeComponent} from './home/home.component';
 import {CanNavigateToAdminGuard} from './can-navigate-to-admin.guard';
 
 

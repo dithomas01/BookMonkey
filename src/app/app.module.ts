@@ -3,7 +3,7 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HomeComponent} from './admin/home/home.component';
+import {HomeComponent} from './home/home.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SearchComponent} from './search/search.component';
 import {TokenInterceptor} from './shared/token-interceptor';
