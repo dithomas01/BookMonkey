@@ -51,6 +51,6 @@ describe('BookStoreService', () => {
     expect(receivedBooks[1].isbn).toBe('222');
 
     expect(httpMock.get).toHaveBeenCalledTimes(1);
-    expect(httpMock.get).toHaveBeenCalledWith('https://api3.angular-buch.com/books');
+    expect(httpMock.get).toHaveBeenCalledWith('https://api3.angular-buch.com/secure/books');
   }));
 });

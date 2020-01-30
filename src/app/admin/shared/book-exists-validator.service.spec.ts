@@ -1,9 +1,27 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { BookExistsValidatorService } from './book-exists-validator.service';
+import {BookExistsValidatorService} from './book-exists-validator.service';
+import {of} from 'rxjs';
+import {BookStoreService} from '../../shared/book-store.service';
 
 describe('BookExistsValidatorService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  let bsMock;
+
+  beforeEach(() => {
+      bsMock = {
+        check: () => of(true)
+      };
+
+      TestBed.configureTestingModule({
+        providers: [
+          {
+            provide: BookStoreService,
+            useValue: bsMock
+          }
+        ]
+      });
+    }
+  );
 
   it('should be created', () => {
     const service: BookExistsValidatorService = TestBed.get(BookExistsValidatorService);
