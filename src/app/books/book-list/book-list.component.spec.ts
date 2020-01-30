@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BookListComponent } from './book-list.component';
+import {BookListComponent} from './book-list.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('BookListComponent', () => {
   let component: BookListComponent;
@@ -8,18 +9,15 @@ describe('BookListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BookListComponent ]
+      declarations: [BookListComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BookListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 });
