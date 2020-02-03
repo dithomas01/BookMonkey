@@ -1,15 +1,32 @@
-import { createAction, props } from '@ngrx/store';
+import {Action} from '@ngrx/store';
+import {Book} from '../../shared/book';
+import {HttpErrorResponse} from '@angular/common/http';
 
-export const loadBooks = createAction(
-  '[Book] Load Books'
-);
+export enum BookActionTypes {
+  LoadBooks = '[Book] Load Books',
+  LoadBooksSuccess = '[Book] Load Books Success',
+  LoadBooksFailure = '[Book] Load Books Failure'
+}
 
-export const loadBooksSuccess = createAction(
-  '[Book] Load Books Success',
-  props<{ data: any }>()
-);
+export class LoadBooks implements Action {
+  readonly type = BookActionTypes.LoadBooks;
+}
 
-export const loadBooksFailure = createAction(
-  '[Book] Load Books Failure',
-  props<{ error: any }>()
-);
+export class LoadBooksSuccess implements Action {
+  readonly type = BookActionTypes.LoadBooksSuccess;
+
+  constructor(public payload: { books: Book[] }) {
+  }
+}
+
+export class LoadBooksFailure implements Action {
+  readonly type = BookActionTypes.LoadBooksFailure;
+
+  constructor(public payload: { error: HttpErrorResponse }) {
+  }
+}
+
+export type BookActions =
+  | LoadBooks
+  | LoadBooksSuccess
+  | LoadBooksFailure;
