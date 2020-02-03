@@ -10,18 +10,18 @@ import * as BookActions from '../actions/book.actions';
 @Injectable()
 export class BookEffects {
 
-  loadBooks$ = createEffect(() => {
-    return this.actions$.pipe( 
-
-      ofType(BookActions.loadBooks),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map(data => BookActions.loadBooksSuccess({ data })),
-          catchError(error => of(BookActions.loadBooksFailure({ error }))))
-      )
-    );
-  });
+  // loadBooks$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //
+  //     ofType(BookActions.loadBooks),
+  //     concatMap(() =>
+  //       /** An EMPTY observable only emits completion. Replace with your own observable API request */
+  //       EMPTY.pipe(
+  //         map(data => BookActions.loadBooksSuccess({ data })),
+  //         catchError(error => of(BookActions.loadBooksFailure({ error }))))
+  //     )
+  //   );
+  // });
 
 
 

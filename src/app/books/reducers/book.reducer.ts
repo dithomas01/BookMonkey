@@ -1,6 +1,5 @@
-import {Action, createReducer, on} from '@ngrx/store';
-import * as BookActions from '../actions/book.actions';
 import {Book} from '../../shared/book';
+import {BookActionTypes, BookActions} from '../actions/book.actions';
 
 export const bookFeatureKey = 'book';
 
@@ -14,14 +13,15 @@ export const initialState: State = {
   loading: false
 };
 
-const bookReducer = createReducer(
-  initialState,
-
-  on(BookActions.loadBooks, state => state),
-  on(BookActions.loadBooksSuccess, (state, action) => state),
-  on(BookActions.loadBooksFailure, (state, action) => state),
-);
-
-export function reducer(state: State | undefined, action: Action) {
-  return bookReducer(state, action);
+export function reducer(state = initialState, action: BookActions): State {
+  switch (action.type) {
+    case BookActionTypes.LoadBooks: {
+      return {...state, loading: true};
+    }
+    case BookActionTypes.LoadBooksSuccess: {
+      return {...state, books: action.payload.books};
+    }
+    default:
+      return state;
+  }
 }
